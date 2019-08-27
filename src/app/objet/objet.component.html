@@ -1,0 +1,31 @@
+<div *ngIf="utilisateur" >
+<mat-card class="example-card utilisateur-objet">
+    <mat-card-header>
+      <mat-card-title>{{utilisateur.utilisateur.nom}}, {{utilisateur.utilisateur.prenom}}</mat-card-title>
+      
+    </mat-card-header>
+    <a  routerLink="/utilisateurs/{{utilisateur.utilisateur.id}}">
+    <img mat-card-image src="{{utilisateur.utilisateur.urlAffiche ? utilisateur.utilisateur.urlAffiche : 'https://upload.wikimedia.org/wikipedia/fr/thumb/2/2b/GITS_laughingman.svg/800px-GITS_laughingman.svg.png'}}" alt="">
+    </a>
+    <mat-card-subtitle>{{utilisateur.utilisateur.login}}</mat-card-subtitle>
+    <mat-card-actions>
+      <button mat-button><mat-icon aria-hidden="false" class="myAddObjet" aria-label="ajouter un objet" (click)="ajouterObjet()">add_circle</mat-icon></button>
+    </mat-card-actions>
+</mat-card>
+
+<mat-card class="example-card">
+    <mat-card-header>
+      <mat-card-title></mat-card-title>
+      <mat-card-subtitle></mat-card-subtitle>
+    </mat-card-header>
+    <img mat-card-image src="{{this.url ? this.url : 'https://upload.wikimedia.org/wikipedia/fr/thumb/2/2b/GITS_laughingman.svg/800px-GITS_laughingman.svg.png'}}" alt="Photo of a {{objet.description}} ">
+    <mat-card-content>
+      <p>{{objet.description}}</p>
+    </mat-card-content>
+    <mat-card-actions>
+      <button mat-button>Editer</button>
+    </mat-card-actions>
+  </mat-card>
+</div>
+
+

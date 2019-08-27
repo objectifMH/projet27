@@ -1,0 +1,31 @@
+<mat-card class="example-card" *ngIf="utilisateur">
+                <mat-card-header>
+                  <div mat-card-avatar class="example-header-image"></div>
+                  <mat-card-title>{{utilisateur.nom}}, {{utilisateur.prenom}}</mat-card-title>
+                  <mat-card-subtitle>{{utilisateur.login}}</mat-card-subtitle>
+                </mat-card-header>
+                <img mat-card-image src="{{utilisateur.urlAffiche ? utilisateur.urlAffiche : 'https://upload.wikimedia.org/wikipedia/fr/thumb/2/2b/GITS_laughingman.svg/800px-GITS_laughingman.svg.png'}}" alt="">
+                
+                <mat-card-actions>
+                  <button mat-button>Editer</button>
+                  <mat-icon aria-hidden="false" (click)="deleteUtilisateur()" >delete</mat-icon>
+
+
+                </mat-card-actions>
+</mat-card>
+<div class="container">
+  <div class="container">
+  <div *ngFor="let o of objets"> 
+    <mat-card class="example-card-objets">
+            <mat-card-header >
+                <div mat-card-avatar class="example-header-image"></div>
+                <mat-card-title class="header-objet">"{{o.description | slice:0:8 }}"</mat-card-title>
+            </mat-card-header>
+            <a routerLink="/objets/{{o.id}}">
+                <img mat-card-image class="imgObjet"
+                src="{{o.urlAffiche ? o.urlAffiche : 'https://www.labaleine.fr/sites/baleine/files/image-not-found.jpg'}}" alt="">
+            </a>
+        </mat-card>
+      </div>
+  </div>
+</div>

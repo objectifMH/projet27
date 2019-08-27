@@ -1,0 +1,22 @@
+<p> On va S'inscrire mon Loulou !</p>
+<div class="example-container" [formGroup]="model">
+      
+
+        <mat-form-field>
+          <input matInput placeholder="Nom" formControlName="nom" >
+        </mat-form-field>
+        <mat-form-field>
+                <input matInput  placeholder="Prénom" formControlName="prenom">
+        </mat-form-field>
+        <mat-form-field>
+                <input matInput  placeholder="Login" formControlName="login">
+        </mat-form-field>
+        <mat-form-field>
+                <input matInput  placeholder="Mot de passe" formControlName="mdp">
+        </mat-form-field>
+        <mat-form-field>
+                <input matInput  placeholder="Url de votre avatar" formControlName="urlAffiche">
+        </mat-form-field>
+        <input type="submit" (click)="validationInscription(utilisateur)"/>
+      
+</div> 

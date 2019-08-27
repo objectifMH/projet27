@@ -1,0 +1,24 @@
+@import '~@angular/material/prebuilt-themes/deeppurple-amber.css';
+
+.example-card {
+    max-width: 400px;
+    margin: auto;
+  }
+  
+  .example-header-image {
+    background-image: url('https://upload.wikimedia.org/wikipedia/fr/thumb/2/2b/GITS_laughingman.svg/800px-GITS_laughingman.svg.png');
+    background-size: cover;
+  }
+  
+  .utilisateur-objet {
+    width: 200px;
+    float : left; 
+  }
+
+  .utilisateur-card{
+    background: grey;
+  }
+
+  .myAddObjet{
+    color:green;
+  }

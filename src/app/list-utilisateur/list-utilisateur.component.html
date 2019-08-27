@@ -1,0 +1,13 @@
+<div>
+    <div *ngFor="let u of utilisateur">
+        <mat-card class="example-card">
+            <mat-card-header>
+                <div mat-card-avatar class="example-header-image"></div>
+                <mat-card-title>{{u.login}}</mat-card-title>
+            </mat-card-header>
+            <a routerLink="/utilisateurs/{{u.id}}">
+                <img mat-card-image src="{{u.urlAffiche ? u.urlAffiche : 'https://upload.wikimedia.org/wikipedia/fr/thumb/2/2b/GITS_laughingman.svg/800px-GITS_laughingman.svg.png'}}" alt="Photo of a {{u.login}}">
+            </a>
+        </mat-card>
+    </div>
+</div>

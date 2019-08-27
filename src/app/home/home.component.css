@@ -1,0 +1,47 @@
+img {
+    max-width: 200px;
+    max-height: 120px;
+    padding:6px 15px;
+}
+
+div {
+    display: inline;
+    margin : 10px; 
+}
+
+.mat-card {
+    display: inline-grid;
+    border: solid 1px grey;
+    /* padding: 5px; */
+    margin: 5px 10px;
+    box-shadow: 2px 2px 2px grey;
+    width: 200px;
+    height: 200px;
+}
+
+
+
+.active-cyan-4 input[type=text]:focus:not([readonly]) {
+    border: 1px solid #4dd0e1;
+    box-shadow: 0 0 0 1px #4dd0e1;
+    }
+
+.form-control {
+    width: 70%;
+    margin: 20px ;
+}
+
+.monContainer{
+    margin-bottom : 20px;
+    clear: both;
+
+}
+
+.inputSearch {
+    display: inline;
+}
+
+.divSearch {
+    margin : auto ;
+    width: 100%;
+}
