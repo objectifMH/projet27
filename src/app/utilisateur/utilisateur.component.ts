@@ -1,10 +1,11 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input , Inject } from '@angular/core';
 import { Utilisateur } from '../utilisateur';
 import { ProjetService } from '../projet.service'
 import { ActivatedRoute, RouterEvent, Router } from '@angular/router'
 import { Objet } from '../objet';
 import {MatDialog} from '@angular/material/dialog';
-
+import { Form, FormGroup, Validators, FormBuilder } from '@angular/forms';
+import {MAT_DIALOG_DATA} from '@angular/material/dialog';
 
 @Component({
   selector: 'app-utilisateur',
@@ -16,6 +17,7 @@ export class UtilisateurComponent implements OnInit {
 
   utilisateur: Utilisateur
   objets : Objet[]
+  objet: Objet 
   url: String ; 
 
   constructor(private projetService: ProjetService , private route: ActivatedRoute , private router:Router , public dialog: MatDialog) { }
@@ -53,12 +55,27 @@ export class UtilisateurComponent implements OnInit {
             () => this.router.navigateByUrl('/utilisateurs')
           )
       }
+      }); 
+    }
+
+    ajouterObjet(){
+      const dialogRef = this.dialog.open(DialogContentExampleDialogObjet , {
+        data : { utilisateur: this.utilisateur }
       });
   
-    
-
-  }
-
+      dialogRef.afterClosed().subscribe(result => 
+        {
+          console.log(`Dialog result: ${result}`);
+          if ( result )
+          {
+            this.projetService.AddObjet(this.objet).subscribe(
+              () => this.router.navigateByUrl('/utilisateurs/{{objet.utilisateurId}}')
+            )
+        }
+        });
+  
+  
+    }
 }
 
 @Component({
@@ -66,3 +83,69 @@ export class UtilisateurComponent implements OnInit {
   templateUrl: 'dialog-content-example-dialog.html',
 })
 export class DialogContentExampleDialog {}
+
+
+
+@Component({
+  selector: 'dialog-content-example-dialog-objet',
+  templateUrl: 'dialog-content-example-dialog-objet.html',
+})
+export class DialogContentExampleDialogObjet {
+
+  modelObjet: FormGroup
+
+  utilisateur:Utilisateur = this.data.utilisateur ; 
+
+  
+
+  constructor(private formBuilder: FormBuilder, 
+    private projetService:ProjetService , 
+    private route:ActivatedRoute , 
+    private router: Router,
+    @Inject(MAT_DIALOG_DATA) public data: any) { }
+
+  reg = new RegExp(
+    '^(https?:\\/\\/)?' + // protocol
+    '((([a-z\\d]([a-z\\d-]*[a-z\\d])*)\\.)+[a-z]{2,}|' + // domain name
+    '((\\d{1,3}\\.){3}\\d{1,3}))' + // OR ip (v4) address
+    '(\\:\\d+)?(\\/[-a-z@\\d%_.~+]*)*' + // port and path
+    '(\\?[;&a-z\\d%_.~+=-]*)?' + // query string
+      '(\\#[-a-z\\d_]*)?$',
+    'i'
+  ) // fragment locator
+
+  ngOnInit() {
+    
+    this.modelObjet = this.formBuilder.group({
+      description: ['', [Validators.required]],
+      urlAfficheObjet: ['', [Validators.required, Validators.pattern(this.reg)]]
+    })
+  }
+
+  
+  validationInscription(){
+    debugger
+    console.log(this.modelObjet);
+    if (this.modelObjet.valid) {
+      this.projetService
+        .AddUtilisateur(this.modelObjet.value)
+        .subscribe(result => this.router.navigateByUrl('/utilisateurs'))
+    }
+  }
+
+
+  get description() {
+    return this.modelObjet.get('nom')
+  }
+
+  get utilisateurId() {
+    return this.utilisateur.id ; 
+  }
+
+
+  get urlAfficheObjet() {
+    return this.modelObjet.get('urlAfficheObjet')
+  }
+
+
+}

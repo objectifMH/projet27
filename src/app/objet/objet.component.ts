@@ -37,28 +37,7 @@ export class ObjetComponent implements OnInit {
     )
   }
 
-  ajouterObjet(){
-    const dialogRef = this.dialog.open(DialogContentExampleDialogObjet);
-
-    dialogRef.afterClosed().subscribe(result => 
-      {
-        console.log(`Dialog result: ${result}`);
-        if ( result )
-        {
-          this.projetService.AddObjet(this.objet).subscribe(
-            () => this.router.navigateByUrl('/utilisateurs/{{objet.utilisateurId}}')
-          )
-      }
-      });
-
-
-  }
+  
   
 }
 
-
-@Component({
-  selector: 'dialog-content-example-dialog-objet',
-  templateUrl: 'dialog-content-example-dialog-objet.html',
-})
-export class DialogContentExampleDialogObjet {}

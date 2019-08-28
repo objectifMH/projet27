@@ -1,12 +1,11 @@
 import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { UtilisateurComponent, DialogContentExampleDialog } from './utilisateur/utilisateur.component';
+import { UtilisateurComponent, DialogContentExampleDialog , DialogContentExampleDialogObjet } from './utilisateur/utilisateur.component';
 import { HomeComponent } from './home/home.component';
 import { HttpClientModule } from '@angular/common/http';
-import { ObjetComponent, DialogContentExampleDialogObjet } from './objet/objet.component';
+import { ObjetComponent } from './objet/objet.component';
 import { RouterModule, Routes} from '@angular/router';
 import { MatFormFieldModule, MatInputModule, MatButtonModule, MatCardModule,MatIconModule, MatSidenavModule } from '@angular/material'
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
@@ -15,7 +14,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { InscriptionComponent } from './inscription/inscription.component';
 
 import {MatDialog, MatDialogModule} from '@angular/material/dialog';
-
+import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 
 
 
@@ -37,7 +36,7 @@ const routes: Routes = [
     ObjetComponent,
     ListUtilisateurComponent,
     InscriptionComponent,
-    UtilisateurComponent, DialogContentExampleDialog , DialogContentExampleDialogObjet
+    UtilisateurComponent, DialogContentExampleDialog , DialogContentExampleDialogObjet  
   ],
   imports: [
     BrowserModule,
@@ -58,6 +57,8 @@ const routes: Routes = [
   ],
   providers: [],
   bootstrap: [AppComponent],
+  schemas: [
+    CUSTOM_ELEMENTS_SCHEMA],
   entryComponents: [UtilisateurComponent ,  DialogContentExampleDialog , DialogContentExampleDialogObjet]
 })
 export class AppModule { }

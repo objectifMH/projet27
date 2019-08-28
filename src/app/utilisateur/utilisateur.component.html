@@ -1,4 +1,4 @@
-<mat-card class="example-card" *ngIf="utilisateur">
+<mat-card class="example-card" *ngIf="utilisateur" >
                 <mat-card-header>
                   <div mat-card-avatar class="example-header-image"></div>
                   <mat-card-title>{{utilisateur.nom}}, {{utilisateur.prenom}}</mat-card-title>
@@ -8,9 +8,10 @@
                 
                 <mat-card-actions>
                   <button mat-button>Editer</button>
-                  <mat-icon aria-hidden="false" (click)="deleteUtilisateur()" >delete</mat-icon>
+                  <mat-icon aria-hidden="false" class="myGreen"   aria-label="ajouter un objet" (click)="ajouterObjet()"  >add_circle</mat-icon>
 
-
+                  <mat-icon aria-hidden="false" class="myRed" (click)="deleteUtilisateur()" >delete</mat-icon>
+                  
                 </mat-card-actions>
 </mat-card>
 <div class="container">
