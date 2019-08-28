@@ -16,9 +16,10 @@ import {MAT_DIALOG_DATA} from '@angular/material/dialog';
 export class UtilisateurComponent implements OnInit {
 
   utilisateur: Utilisateur
-  objets : Objet[]
-  objetAjout: Objet 
+  objets : Objet[] ; 
+  objetAjout: Objet ;
   url: String ; 
+  objet:Objet ; 
 
   constructor(private projetService: ProjetService ,
      private route: ActivatedRoute ,
@@ -81,9 +82,13 @@ export class UtilisateurComponent implements OnInit {
         error => console.debug(error));
   }
 
-  deleteObjet() {
-    console.log(this.objetAjout);
-    debugger
+  deleteObjet(obj:Objet) {
+    console.log(obj);
+    this.objet = obj ; 
+    this.projetService.delObjetForUtilisateur(this.objet).subscribe(result => 
+      {
+        this.router.navigateByUrl('/utilisateurs/'+this.utilisateur.id)
+      }) 
   }
 
 
