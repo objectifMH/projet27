@@ -27,7 +27,7 @@
                 <img mat-card-image class="imgObjet"
                 src="{{o.urlAffiche ? o.urlAffiche : 'https://www.labaleine.fr/sites/baleine/files/image-not-found.jpg'}}" alt="">
             </a>
-            <mat-icon aria-hidden="false" class="myRed  iconDeleteObjet" (click)="deleteObjet()" >delete</mat-icon>
+            <mat-icon aria-hidden="false" class="myRed  iconDeleteObjet"   (click)="deleteObjet(o)" >delete</mat-icon>
                   
         </mat-card>
       </div>
