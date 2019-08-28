@@ -45,7 +45,11 @@ export class ProjetService {
     return this.http.delete(environment.backUrl + '/utilisateurs/' + id)
   }
 
-  public AddObjet(objet: Objet) {
+  public AddObjet(objet: Objet)  {
     return this.http.post(environment.backUrl + '/objets', objet)
+  }
+
+  public delObjetForUtilisateur(objet: Objet) {
+    return this.http.delete(environment.backUrl + '/objets/' + objet.id);
   }
 }

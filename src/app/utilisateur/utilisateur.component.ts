@@ -69,13 +69,15 @@ export class UtilisateurComponent implements OnInit {
       });
       dialogRef.afterClosed().subscribe(result => 
         {
-          //debugger
+          
           this.objetAjout = result.value ; 
           this.objetAjout.utilisateurId = this.utilisateur.id ; 
           if ( result.valid )
           {
             this.projetService.AddObjet(this.objetAjout).subscribe(
-              () => this.router.navigateByUrl('/utilisateurs/'+this.utilisateur.id)
+              () => {
+                this.getObjetsForUtilisateur();
+                this.router.navigateByUrl('/utilisateurs/'+this.utilisateur.id);}
             )
         }
         },
@@ -84,13 +86,38 @@ export class UtilisateurComponent implements OnInit {
 
   deleteObjet(obj:Objet) {
     console.log(obj);
-    this.objet = obj ; 
-    this.projetService.delObjetForUtilisateur(this.objet).subscribe(result => 
+    
+
+
+    const dialogRef = this.dialog.open(DialogContentExampleDialog);
+
+    dialogRef.afterClosed().subscribe(result => 
       {
-        this.router.navigateByUrl('/utilisateurs/'+this.utilisateur.id)
-      }) 
+        if ( result )
+        {
+          this.objet = obj ; 
+          this.projetService.delObjetForUtilisateur(this.objet).subscribe(result => 
+            {
+              this.getObjetsForUtilisateur()
+              this.router.navigateByUrl('/utilisateurs/'+this.utilisateur.id);
+              
+            }) 
+      }
+      }); 
   }
 
+  getObjetsForUtilisateur() {
+    this.projetService.getObjetsByUutilisateur(this.utilisateur.id).subscribe(
+      resultObjets => {
+        this.objets = resultObjets ;
+      }
+      ,
+      error => console.log('Une erreur est survenue, j"arrive pas à charger '+this.utilisateur.login, error)
+      
+    )
+
+  }
+  
 
 }
 

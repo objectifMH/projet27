@@ -48,13 +48,14 @@ const routes: Routes = [
     MatButtonModule,
     MatCardModule,
     MatIconModule,
-    RouterModule.forRoot(routes), 
+    RouterModule.forRoot(routes, {onSameUrlNavigation : 'reload'}), 
     MatSidenavModule,
     BrowserAnimationsModule,
     FormsModule ,
     MatDialogModule
 
   ],
+ exports: [RouterModule],
   providers: [
     { provide: MatDialogRef, useValue: {} },
     { provide: MAT_DIALOG_DATA, useValue: [] }

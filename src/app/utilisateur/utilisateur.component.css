@@ -9,7 +9,11 @@
 
   }
 
+  .margin-top-120{
+    margin-top: 120px; 
+  }
   
+
   .example-header-image {
     background-image: url('https://upload.wikimedia.org/wikipedia/fr/thumb/2/2b/GITS_laughingman.svg/800px-GITS_laughingman.svg.png');
     background-size: cover;
@@ -18,9 +22,9 @@
   .example-card-objets {
     width: 250px;
     
-    border: solid 2px grey;
-    box-shadow: 7px 9px 10px rgb(158, 43, 43);
-    background: darkcyan;
+    border: solid 2px #fdebeb;
+    box-shadow: 7px 9px 10px #9E9E9E ! important ;
+    background: #d8d8d8;
     margin: 10px;
   }
   
