@@ -13,7 +13,7 @@ import { ListUtilisateurComponent } from './list-utilisateur/list-utilisateur.co
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { InscriptionComponent } from './inscription/inscription.component';
 
-import {MatDialog, MatDialogModule} from '@angular/material/dialog';
+import {MatDialog, MatDialogModule, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material/dialog';
 import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 
 
@@ -55,7 +55,10 @@ const routes: Routes = [
     MatDialogModule
 
   ],
-  providers: [],
+  providers: [
+    { provide: MatDialogRef, useValue: {} },
+    { provide: MAT_DIALOG_DATA, useValue: [] }
+  ],
   bootstrap: [AppComponent],
   schemas: [
     CUSTOM_ELEMENTS_SCHEMA],

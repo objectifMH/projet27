@@ -4,7 +4,11 @@
 .example-card {
     max-width: 400px;
     margin: auto;
+    
+    box-shadow: 5px 9px 9px grey;
+
   }
+
   
   .example-header-image {
     background-image: url('https://upload.wikimedia.org/wikipedia/fr/thumb/2/2b/GITS_laughingman.svg/800px-GITS_laughingman.svg.png');
@@ -17,6 +21,7 @@
     border: solid 2px grey;
     box-shadow: 7px 9px 10px rgb(158, 43, 43);
     background: darkcyan;
+    margin: 10px;
   }
   
   .header-objet{
@@ -34,4 +39,21 @@
 
   .myRed {
     color : red;
+  }
+
+  .myRight {
+    float : right ; 
+  }
+
+  .nbrObjets{
+    border: solid darkcyan 2px;
+    padding: 1px 10px;
+    margin: 5px 10px;
+    border-radius: 3px;
+    box-shadow: 3px 5px 5px grey;
+
+  }
+
+  .iconDeleteObjet{
+    padding : 11px;
   }

@@ -7,11 +7,11 @@
 </div>
 
 <div class="container monContainer">
-    <div class="container" *ngFor="let o of objets">
+    <div class="container" *ngFor="let o of objets"> 
         <mat-card class="example-card">
                 <mat-card-header>
                     <div mat-card-avatar class="example-header-image"></div>
-                    <mat-card-title>"{{o.description | slice:0:8 }}"</mat-card-title>
+                    <mat-card-title>{{o.description | slice:0: 11}}</mat-card-title>
                 </mat-card-header>
                 <a routerLink="/objets/{{o.id}}">
                     <img mat-card-image 

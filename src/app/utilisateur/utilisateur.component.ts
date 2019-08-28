@@ -3,7 +3,7 @@ import { Utilisateur } from '../utilisateur';
 import { ProjetService } from '../projet.service'
 import { ActivatedRoute, RouterEvent, Router } from '@angular/router'
 import { Objet } from '../objet';
-import {MatDialog} from '@angular/material/dialog';
+import {MatDialog, MatDialogRef} from '@angular/material/dialog';
 import { Form, FormGroup, Validators, FormBuilder } from '@angular/forms';
 import {MAT_DIALOG_DATA} from '@angular/material/dialog';
 
@@ -17,10 +17,14 @@ export class UtilisateurComponent implements OnInit {
 
   utilisateur: Utilisateur
   objets : Objet[]
-  objet: Objet 
+  objetAjout: Objet 
   url: String ; 
 
-  constructor(private projetService: ProjetService , private route: ActivatedRoute , private router:Router , public dialog: MatDialog) { }
+  constructor(private projetService: ProjetService ,
+     private route: ActivatedRoute ,
+     private router:Router ,
+    public dialog: MatDialog,
+    public dialogRef: MatDialogRef<UtilisateurComponent>) { }
 
   ngOnInit() {
     const utilId = +this.route.snapshot.paramMap.get('id')
@@ -62,20 +66,27 @@ export class UtilisateurComponent implements OnInit {
       const dialogRef = this.dialog.open(DialogContentExampleDialogObjet , {
         data : { utilisateur: this.utilisateur }
       });
-  
       dialogRef.afterClosed().subscribe(result => 
         {
-          console.log(`Dialog result: ${result}`);
-          if ( result )
+          //debugger
+          this.objetAjout = result.value ; 
+          this.objetAjout.utilisateurId = this.utilisateur.id ; 
+          if ( result.valid )
           {
-            this.projetService.AddObjet(this.objet).subscribe(
-              () => this.router.navigateByUrl('/utilisateurs/{{objet.utilisateurId}}')
+            this.projetService.AddObjet(this.objetAjout).subscribe(
+              () => this.router.navigateByUrl('/utilisateurs/'+this.utilisateur.id)
             )
         }
-        });
-  
-  
-    }
+        },
+        error => console.debug(error));
+  }
+
+  deleteObjet() {
+    console.log(this.objetAjout);
+    debugger
+  }
+
+
 }
 
 @Component({
@@ -94,15 +105,14 @@ export class DialogContentExampleDialogObjet {
 
   modelObjet: FormGroup
 
-  utilisateur:Utilisateur = this.data.utilisateur ; 
+  //utilisateur:Utilisateur = this.data.utilisateur ; 
 
   
 
   constructor(private formBuilder: FormBuilder, 
     private projetService:ProjetService , 
     private route:ActivatedRoute , 
-    private router: Router,
-    @Inject(MAT_DIALOG_DATA) public data: any) { }
+    private router: Router) { }
 
   reg = new RegExp(
     '^(https?:\\/\\/)?' + // protocol
@@ -118,34 +128,10 @@ export class DialogContentExampleDialogObjet {
     
     this.modelObjet = this.formBuilder.group({
       description: ['', [Validators.required]],
-      urlAfficheObjet: ['', [Validators.required, Validators.pattern(this.reg)]]
+      urlAffiche: ['', [Validators.required, Validators.pattern(this.reg)]]
     })
   }
 
-  
-  validationInscription(){
-    debugger
-    console.log(this.modelObjet);
-    if (this.modelObjet.valid) {
-      this.projetService
-        .AddUtilisateur(this.modelObjet.value)
-        .subscribe(result => this.router.navigateByUrl('/utilisateurs'))
-    }
-  }
-
-
-  get description() {
-    return this.modelObjet.get('nom')
-  }
-
-  get utilisateurId() {
-    return this.utilisateur.id ; 
-  }
-
-
-  get urlAfficheObjet() {
-    return this.modelObjet.get('urlAfficheObjet')
-  }
 
 
 }
