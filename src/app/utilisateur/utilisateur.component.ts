@@ -20,6 +20,7 @@ export class UtilisateurComponent implements OnInit {
   objetAjout: Objet ;
   url: String ; 
   objet:Objet ; 
+  utilisateurIdParam : number; 
 
   constructor(private projetService: ProjetService ,
      private route: ActivatedRoute ,
@@ -29,11 +30,12 @@ export class UtilisateurComponent implements OnInit {
 
   ngOnInit() {
     const utilId = +this.route.snapshot.paramMap.get('id')
+    this.utilisateurIdParam = utilId ; 
     this.projetService.getUtilisateur(utilId).subscribe(
       result => {
         this.utilisateur = result ;
         this.url = (this.utilisateur.urlAffiche !== "") ? this.utilisateur.urlAffiche : "https://fr.wikipedia.org/wiki/Liste_des_personnages_de_Ghost_in_the_Shell#/media/Fichier:GITS_laughingman.svg";
-        this.projetService.getObjetsByUutilisateur(utilId).subscribe(
+        this.projetService.getObjetsByUtilisateur(utilId).subscribe(
           resultObjets => {
             this.objets = resultObjets ;
           }
@@ -69,11 +71,12 @@ export class UtilisateurComponent implements OnInit {
       });
       dialogRef.afterClosed().subscribe(result => 
         {
-          
+          debugger
           this.objetAjout = result.value ; 
           this.objetAjout.utilisateurId = this.utilisateur.id ; 
           if ( result.valid )
           {
+            debugger
             this.projetService.AddObjet(this.objetAjout).subscribe(
               () => {
                 this.getObjetsForUtilisateur();
@@ -84,11 +87,31 @@ export class UtilisateurComponent implements OnInit {
         error => console.debug(error));
   }
 
+  editObjet(editObjet : Objet){
+    const dialogRef = this.dialog.open(DialogContentExampleDialogObjet , {
+      data : { utilisateur: this.utilisateur }
+    });
+    dialogRef.afterClosed().subscribe(result => 
+      {
+        debugger;
+        this.objetAjout = result.value ; 
+        this.objetAjout.id = editObjet.id ; debugger
+        this.objetAjout.utilisateurId = this.utilisateur.id ; 
+        console.log(result);
+        if ( result.valid )
+        {
+          this.projetService.updateObjet(this.objetAjout).subscribe(
+            () => {
+              this.getObjetsForUtilisateur();
+              this.router.navigateByUrl('/utilisateurs/'+this.utilisateur.id);}
+          )
+      }
+      },
+      error => console.debug(error));
+}
+
   deleteObjet(obj:Objet) {
     console.log(obj);
-    
-
-
     const dialogRef = this.dialog.open(DialogContentExampleDialog);
 
     dialogRef.afterClosed().subscribe(result => 
@@ -107,16 +130,14 @@ export class UtilisateurComponent implements OnInit {
   }
 
   getObjetsForUtilisateur() {
-    this.projetService.getObjetsByUutilisateur(this.utilisateur.id).subscribe(
+    this.projetService.getObjetsByUtilisateur(this.utilisateur.id).subscribe(
       resultObjets => {
         this.objets = resultObjets ;
       }
       ,
       error => console.log('Une erreur est survenue, j"arrive pas à charger '+this.utilisateur.login, error)
-      
-    )
-
-  }
+      )
+ }
   
 
 }
@@ -136,7 +157,7 @@ export class DialogContentExampleDialog {}
 export class DialogContentExampleDialogObjet {
 
   modelObjet: FormGroup
-
+  isEditing =false;
   //utilisateur:Utilisateur = this.data.utilisateur ; 
 
   
@@ -157,7 +178,16 @@ export class DialogContentExampleDialogObjet {
   ) // fragment locator
 
   ngOnInit() {
-    
+
+    const idObjet = +this.route.snapshot.paramMap.get('id')
+
+    if (idObjet) {
+      this.isEditing = true
+      this.projetService
+        .getObjet(idObjet)
+        .subscribe(objet => this.modelObjet.reset(idObjet))
+    }
+    debugger
     this.modelObjet = this.formBuilder.group({
       description: ['', [Validators.required]],
       urlAffiche: ['', [Validators.required, Validators.pattern(this.reg)]]

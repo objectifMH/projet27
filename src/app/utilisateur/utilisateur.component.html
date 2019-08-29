@@ -9,9 +9,9 @@
                 <mat-card-actions>
                   <button mat-button>Editer</button>
                   <span  *ngIf="objets" class="myRight nbrObjets">{{objets.length}}</span>
-                  <mat-icon aria-hidden="false" class="myGreen"   aria-label="ajouter un objet" (click)="ajouterObjet()"  >add_circle</mat-icon>
+                  <mat-icon aria-hidden="false" class="myGreen icon-utilisateur myCursorPointer"   aria-label="ajouter un objet" (click)="ajouterObjet()"  >add_circle</mat-icon>
 
-                  <mat-icon aria-hidden="false" class="myRed" (click)="deleteUtilisateur()" >delete</mat-icon>
+                  <mat-icon aria-hidden="false" class="myRed icon-utilisateur myCursorPointer" (click)="deleteUtilisateur()" >delete</mat-icon>
                   
                 </mat-card-actions>
 </mat-card>
@@ -27,7 +27,9 @@
                 <img mat-card-image class="imgObjet"
                 src="{{o.urlAffiche ? o.urlAffiche : 'https://www.labaleine.fr/sites/baleine/files/image-not-found.jpg'}}" alt="">
             </a>
-            <mat-icon aria-hidden="false" class="myRed  iconDeleteObjet"   (click)="deleteObjet(o)" >delete</mat-icon>
+            <mat-icon aria-hidden="false" class="myBlue  iconEditObjet myCursorPointer"   (click)="editObjet(o)" >editer</mat-icon>
+
+            <mat-icon aria-hidden="false" class="myRed  iconDeleteObjet myCursorPointer"   (click)="deleteObjet(o)" >delete</mat-icon>
                   
         </mat-card>
       </div>

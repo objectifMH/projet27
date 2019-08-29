@@ -4,6 +4,7 @@ import { ProjetService } from '../projet.service'
 import { ActivatedRoute, Router } from '@angular/router';
 import { Utilisateur } from '../utilisateur';
 import { MatDialog } from '@angular/material/dialog';
+import { DialogContentExampleDialogObjet } from '../utilisateur/utilisateur.component';
 
 @Component({
   selector: 'app-objet',
@@ -14,6 +15,7 @@ export class ObjetComponent implements OnInit {
 
   utilisateur : Utilisateur
   objet: Objet
+  ObjetUpdate : Objet
   url: String ; 
 
   constructor(private projetService: ProjetService , private route: ActivatedRoute , public dialog: MatDialog , private router: Router ) { }
@@ -37,6 +39,37 @@ export class ObjetComponent implements OnInit {
     )
   }
 
+  
+
+    editerObjet(editObjet : Objet){
+      const dialogRef = this.dialog.open(DialogContentExampleDialogObjet , {
+        data : { utilisateur: this.utilisateur }
+      });
+      dialogRef.afterClosed().subscribe(result => 
+        {
+          
+          this.ObjetUpdate = editObjet ; 
+          this.ObjetUpdate.description = result.value.description ; 
+          this.ObjetUpdate.urlAffiche = result.value.urlAffiche ; 
+          debugger
+          if ( result.valid )
+          {
+            debugger
+            this.projetService.updateObjet(this.ObjetUpdate).subscribe(
+              () => {
+                this.getObjetById(this.ObjetUpdate);
+                this.router.navigateByUrl('/objets/'+this.ObjetUpdate.id);}
+            )
+        }
+        },
+        error => console.debug(error));
+  }
+
+  getObjetById(objet:Objet){
+    this.projetService.getObjet(objet.id).subscribe(
+      result => {this.objet = result ;  }
+    )
+  }
   
   
 }

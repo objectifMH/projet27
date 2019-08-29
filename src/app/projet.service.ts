@@ -28,7 +28,7 @@ export class ProjetService {
     return this.http.get<Utilisateur>(environment.backUrl + '/utilisateurs/' + id)
   }
 
-  public getObjetsByUutilisateur(id: number): Observable<Objet[]> {
+  public getObjetsByUtilisateur(id: number): Observable<Objet[]> {
     return this.http.get<Objet[]>(environment.backUrl + '/utilisateurs/' + id + "/objets")
   }
 
@@ -51,5 +51,9 @@ export class ProjetService {
 
   public delObjetForUtilisateur(objet: Objet) {
     return this.http.delete(environment.backUrl + '/objets/' + objet.id);
+  }
+
+  public updateObjet(objet: Objet) {
+    return this.http.put(environment.backUrl + '/objets/' + objet.id, objet);
   }
 }

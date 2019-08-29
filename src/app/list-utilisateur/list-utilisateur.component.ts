@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Utilisateur } from '../utilisateur';
 import { ProjetService } from '../projet.service'
+import { Objet } from '../objet';
 
 @Component({
   selector: 'app-list-utilisateur',
@@ -10,6 +11,7 @@ import { ProjetService } from '../projet.service'
 export class ListUtilisateurComponent implements OnInit {
 
   utilisateur: Utilisateur[]
+  objets : Objet[]
   url: string 
 
   constructor(private projetService: ProjetService ,  ) { }
@@ -18,10 +20,24 @@ export class ListUtilisateurComponent implements OnInit {
     this.projetService.getUtilisateurs().subscribe(
       result => {
         this.utilisateur = result;
-        console.log(this.utilisateur);
+        for ( let u of this.utilisateur)
+        {
+          this.recupObjets(u);
+        }
+        
       }
       ,
       error => console.error('Erreur, La liste d"Utilisateurs ne se charge pas', error)
+    )
+
+  
+  }
+
+  recupObjets(utilisateur:Utilisateur) {
+    this.projetService.getObjetsByUtilisateur(utilisateur.id).subscribe(
+      result => {
+        this.objets = result; 
+      }
     )
   }
 

@@ -1,0 +1,10 @@
+<mat-card class="example-card">
+    <mat-card-header>
+        <div mat-card-avatar class="example-header-image"></div>
+        <mat-card-title>{{objet.description | slice:0: 11}}</mat-card-title>
+    </mat-card-header>
+    <a routerLink="/objets/{{objet.id}}">
+        <img mat-card-image 
+        src="{{objet.urlAffiche ? objet.urlAffiche : 'https://www.labaleine.fr/sites/baleine/files/image-not-found.jpg'}}" alt="">
+    </a>
+</mat-card>

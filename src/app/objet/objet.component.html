@@ -13,6 +13,8 @@
     </mat-card-actions>
 </mat-card>
 
+{{ editerObjet | json}}
+
 <mat-card class="example-card">
     <mat-card-header>
       <mat-card-title></mat-card-title>
@@ -23,7 +25,10 @@
       <p>{{objet.description}}</p>
     </mat-card-content>
     <mat-card-actions>
-      <button mat-button>Editer</button>
+      <mat-icon aria-hidden="false" class="myGreen icon-utilisateur myCursorPointer"   aria-label="ajouter un objet" (click)="editerObjet(objet)"  >edit</mat-icon>
+
+      <mat-icon aria-hidden="false" class="myRed icon-utilisateur myCursorPointer" (click)="deleteUtilisateur()" >delete</mat-icon>
+      
     </mat-card-actions>
   </mat-card>
 </div>

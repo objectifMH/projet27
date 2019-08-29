@@ -49,6 +49,13 @@
     float : right ; 
   }
 
+  .myGrey {
+    color : grey;
+  }
+
+  .myBlue {
+    color : blue ; 
+  }
   .nbrObjets{
     border: solid darkcyan 2px;
     padding: 1px 10px;
