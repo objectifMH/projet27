@@ -1,17 +1,34 @@
-
 <div class="container monContainer clearBoth">
     <div class="container ">
-        <app-message
-            *ngFor="let message of messages"
-            [messageInput]="message"
-        > 
+        <app-message *ngFor="let message of messages" [messageInput]="message">
         </app-message>
     </div>
     <div class="smallContainer">
-            <mat-icon aria-hidden="false" class="myGreen icon-utilisateur myCursorPointer myRight"   aria-label="ajouter un objet" (click)="ajouterObjet()"  >add_circle</mat-icon>
+        <mat-icon aria-hidden="false" class="myGreen icon-utilisateur myCursorPointer myRight"
+            aria-label="ajouter un objet" (click)="addFormMessage()">add_circle</mat-icon>
 
     </div>
-    <div class="clearBoth margin-top20 p-3">
+    <div *ngIf="isCreateMessage" class="clearBoth margin-top20 p-3">
+        <form #f>
+            <div class="form-row align-items-center">
+                <div class="col-auto my-1">
+                    <select class="custom-select mr-sm-2" id="inlineFormCustomSelect">
+                        <option selected>Login</option>
+
+                        <option *ngFor="let utilis of utilisateurs" value="{{utilis.id}}">{{utilis.login}}</option>
+
+                    </select>
+                </div>
+                <div class="col-auto my-1">
+                        <div class="col">
+                                <input type="text" class="form-control" placeholder="Messages ... ">
+                        </div>
+                </div>
+                <div class="col-auto my-1">
+                    <button type="submit" class="btn btn-primary" (click)=validateMessage(f.value)>Submit</button>
+                </div>
+            </div>
+        </form>
 
     </div>
 </div>

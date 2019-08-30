@@ -13,25 +13,26 @@ import { DialogContentExampleDialogObjet } from '../utilisateur/utilisateur.comp
 })
 export class ObjetComponent implements OnInit {
 
-  utilisateur : Utilisateur
+  utilisateur: Utilisateur
   objet: Objet
-  ObjetUpdate : Objet
-  url: String ; 
+  ObjetUpdate: Objet
+  url: String;
 
-  constructor(private projetService: ProjetService , private route: ActivatedRoute , public dialog: MatDialog , private router: Router ) { }
+  constructor(private projetService: ProjetService, private route: ActivatedRoute, public dialog: MatDialog, private router: Router) { }
 
   ngOnInit() {
     const objetId = +this.route.snapshot.paramMap.get('id')
     this.projetService.getObjet(objetId).subscribe(
       result => {
-        this.objet = result ; 
+        this.objet = result;
         this.url = (this.objet.urlAffiche !== "") ? this.objet.urlAffiche : "https://www.labaleine.fr/sites/baleine/files/image-not-found.jpg";
-        
+
         this.projetService.getUtilisateurForObjet(objetId).subscribe(
           resultUtil => {
-            this.utilisateur = resultUtil ; }
-            ,
-            error => console.log('Une erreur est survenue lors du chargement de l"utilsateur', error)
+            this.utilisateur = resultUtil;
+          }
+          ,
+          error => console.log('Une erreur est survenue lors du chargement de l"utilsateur', error)
         )
       }
       ,
@@ -39,38 +40,37 @@ export class ObjetComponent implements OnInit {
     )
   }
 
-  
 
-    editerObjet(editObjet : Objet){
-      const dialogRef = this.dialog.open(DialogContentExampleDialogObjet , {
-        data : { utilisateur: this.utilisateur }
-      });
-      dialogRef.afterClosed().subscribe(result => 
-        {
-          
-          this.ObjetUpdate = editObjet ; 
-          this.ObjetUpdate.description = result.value.description ; 
-          this.ObjetUpdate.urlAffiche = result.value.urlAffiche ; 
-          
-          if ( result.valid )
-          {
-            
-            this.projetService.updateObjet(this.ObjetUpdate).subscribe(
-              () => {
-                this.getObjetById(this.ObjetUpdate);
-                this.router.navigateByUrl('/objets/'+this.ObjetUpdate.id);}
-            )
-        }
-        },
-        error => console.debug(error));
+
+  editerObjet(editObjet: Objet) {
+    const dialogRef = this.dialog.open(DialogContentExampleDialogObjet, {
+      data: { utilisateur: this.utilisateur }
+    });
+    dialogRef.afterClosed().subscribe(result => {
+
+      this.ObjetUpdate = editObjet;
+      this.ObjetUpdate.description = result.value.description;
+      this.ObjetUpdate.urlAffiche = result.value.urlAffiche;
+
+      if (result.valid) {
+
+        this.projetService.updateObjet(this.ObjetUpdate).subscribe(
+          () => {
+            this.getObjetById(this.ObjetUpdate);
+            this.router.navigateByUrl('/objets/' + this.ObjetUpdate.id);
+          }
+        )
+      }
+    },
+      error => console.debug(error));
   }
 
-  getObjetById(objet:Objet){
+  getObjetById(objet: Objet) {
     this.projetService.getObjet(objet.id).subscribe(
-      result => {this.objet = result ;  }
+      result => { this.objet = result; }
     )
   }
-  
-  
+
+
 }
 

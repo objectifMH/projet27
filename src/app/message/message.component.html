@@ -1,9 +1,11 @@
 
 <div  *ngIf="message" class="media text-muted pt-3">
-    <img  class="mr-2 rounded" style="width: 50px; height: 50px;" src="{{utilisateur.urlAffiche}}" data-holder-rendered="true">
-    <p class="media-body pb-3 mb-0 small lh-125 border-bottom border-gray">
+        <a routerLink="/utilisateurs/{{utilisateur.id}}">
+            <img  class="mr-2 rounded myImg" src="{{utilisateur.urlAffiche}}" data-holder-rendered="true">
+        </a>
+     <p class="media-body pb-3 mb-0 small lh-125 border-bottom border-gray">
       <strong class="d-block text-gray-dark">{{utilisateur.login}}</strong>
-        {{message.content}}   {{message.utilisateurId}} 
+        {{message.content}} 
     </p>
     <span><mat-icon aria-hidden="false" class="myRed icon-utilisateur myCursorPointer" (click)="deleteMessage(message)" >delete</mat-icon>
     </span>

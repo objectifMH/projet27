@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Message } from '../message';
 import { ProjetService } from '../projet.service';
+import { Utilisateur } from '../utilisateur';
 
 @Component({
   selector: 'app-list-messages',
@@ -10,10 +11,13 @@ import { ProjetService } from '../projet.service';
 export class ListMessagesComponent implements OnInit {
 
   messages: Message[] = [];
+  utilisateurs: Utilisateur[];
 
   newMessage: string;
 
-  constructor(private projetService : ProjetService) {}
+  isCreateMessage: boolean = false;
+
+  constructor(private projetService: ProjetService) { }
 
   ngOnInit() {
     this.refreshMessages();
@@ -21,15 +25,32 @@ export class ListMessagesComponent implements OnInit {
 
   private refreshMessages() {
     this.projetService
-    .getMessages()
-    .subscribe(
-      result => {(this.messages = result) ;  },
-      error => console.error("Une erreur est survenue, on arrive pas a recuperer les messages", error)
-    );
+      .getMessages()
+      .subscribe(
+        result => {
+          (this.messages = result);
+          this.projetService.getUtilisateurs().subscribe(
+            resultUtil => { (this.utilisateurs = resultUtil);  },
+            error => console.error("Une erreur est survenue, on arrive pas a recuperer les messages", error)
+
+          )
+        },
+        error => console.error("Une erreur est survenue, on arrive pas a recuperer les messages", error)
+      );
+
+
   }
 
+  addFormMessage() {
+    this.isCreateMessage = !this.isCreateMessage;
 
-  addMessage(messageToAdd:Message) {
+  }
+
+  validateMessage(val) {
+    console.log(val);
+  }
+
+  addMessage(messageToAdd: Message) {
     this.projetService.AddMessage(messageToAdd).subscribe(() => this.refreshMessages())
   }
 
