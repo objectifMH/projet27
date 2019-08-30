@@ -187,7 +187,6 @@ export class DialogContentExampleDialogObjet {
         .getObjet(idObjet)
         .subscribe(objet => this.modelObjet.reset(idObjet))
     }
-    debugger
     this.modelObjet = this.formBuilder.group({
       description: ['', [Validators.required]],
       urlAffiche: ['', [Validators.required, Validators.pattern(this.reg)]]

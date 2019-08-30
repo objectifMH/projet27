@@ -5,3 +5,27 @@
 .myCursorPointer {
     cursor: pointer;
 }
+
+.myGreen{
+    color:green;
+  }
+
+  .myRed {
+    color : red;
+  }
+
+  .myRight {
+    float : right ; 
+  }
+
+  .myGrey {
+    color : grey;
+  }
+
+  .myBlue {
+    color : blue ; 
+  }
+
+  .clearBoth {
+      clear: both;
+  }

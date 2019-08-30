@@ -1,0 +1,12 @@
+.monContainer {
+    border: solid 2px darkcyan;
+    border-radius: 15px;
+    box-shadow: 5px 6px 8px grey;
+    margin: 80px auto;
+}
+
+
+.smallContainer {
+    width: 70%;
+    margin: 20px auto;
+}

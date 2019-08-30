@@ -15,6 +15,8 @@ import { InscriptionComponent } from './inscription/inscription.component';
 
 import {MatDialog, MatDialogModule, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material/dialog';
 import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
+import { MessageComponent } from './message/message.component';
+import { ListMessagesComponent } from './list-messages/list-messages.component';
 
 
 
@@ -24,6 +26,7 @@ const routes: Routes = [
   {path: 'objets/:id', component: ObjetComponent},
   {path: 'utilisateurs/:id', component: UtilisateurComponent},
   {path: 'utilisateurs', component: ListUtilisateurComponent},
+  {path: 'messages', component: ListMessagesComponent},
   {path: 'inscription', component: InscriptionComponent},
   {path: '**', redirectTo: '/'}
 ]
@@ -36,7 +39,7 @@ const routes: Routes = [
     ObjetComponent,
     ListUtilisateurComponent,
     InscriptionComponent,
-    UtilisateurComponent, DialogContentExampleDialog , DialogContentExampleDialogObjet  
+    UtilisateurComponent, DialogContentExampleDialog , DialogContentExampleDialogObjet, MessageComponent, ListMessagesComponent  
   ],
   imports: [
     BrowserModule,

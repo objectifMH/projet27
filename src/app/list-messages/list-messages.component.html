@@ -1,0 +1,17 @@
+
+<div class="container monContainer clearBoth">
+    <div class="container ">
+        <app-message
+            *ngFor="let message of messages"
+            [messageInput]="message"
+        > 
+        </app-message>
+    </div>
+    <div class="smallContainer">
+            <mat-icon aria-hidden="false" class="myGreen icon-utilisateur myCursorPointer myRight"   aria-label="ajouter un objet" (click)="ajouterObjet()"  >add_circle</mat-icon>
+
+    </div>
+    <div class="clearBoth margin-top20 p-3">
+
+    </div>
+</div>

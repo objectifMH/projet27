@@ -51,10 +51,10 @@ export class ObjetComponent implements OnInit {
           this.ObjetUpdate = editObjet ; 
           this.ObjetUpdate.description = result.value.description ; 
           this.ObjetUpdate.urlAffiche = result.value.urlAffiche ; 
-          debugger
+          
           if ( result.valid )
           {
-            debugger
+            
             this.projetService.updateObjet(this.ObjetUpdate).subscribe(
               () => {
                 this.getObjetById(this.ObjetUpdate);

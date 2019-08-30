@@ -4,6 +4,7 @@ import { environment } from 'src/environments/environment'
 import { Observable } from 'rxjs'
 import { Objet } from './objet'
 import { Utilisateur } from './utilisateur';
+import { Message } from './message';
 
 @Injectable({
   providedIn: 'root'
@@ -56,4 +57,21 @@ export class ProjetService {
   public updateObjet(objet: Objet) {
     return this.http.put(environment.backUrl + '/objets/' + objet.id, objet);
   }
+
+  public getMessage(id: number): Observable<Message> {
+    return this.http.get<Message>(environment.backUrl + '/messages/' + id + "/?_expand=utilisateur")
+  }
+
+  public getMessages(): Observable<Message[]> {
+    return this.http.get<Message[]>(environment.backUrl + '/messages' +  "?_expand=utilisateur")
+  }
+
+  public AddMessage(message: Message)  {
+    return this.http.post(environment.backUrl + '/messages', message)
+  }
+
+  public delMessage(id: number) {
+    return this.http.delete(environment.backUrl + '/messages/' + id)
+  }
+
 }
