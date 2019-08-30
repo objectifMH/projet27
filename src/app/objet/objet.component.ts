@@ -71,6 +71,17 @@ export class ObjetComponent implements OnInit {
     )
   }
 
+  deleteUtilisateur(obj:Objet) {
+    console.log(obj)
+    this.projetService.delObjetForUtilisateur(obj).subscribe(
+      () => {
+        this.projetService.getObjets().subscribe(
+          
+        )
+        this.router.navigateByUrl('/objets/' + this.ObjetUpdate.id);
+      }
+    )
+  }
 
 }
 

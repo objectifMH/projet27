@@ -54,7 +54,7 @@ export class ListMessagesComponent implements OnInit {
     this.projetService.AddMessage(messageToAdd).subscribe(() => this.refreshMessages())
   }
 
-  deleteTodo(message: Message) {
+  deleteMessage(message: Message) {
     this.projetService.delMessage(message.id).subscribe(() => this.refreshMessages())
   }
 }

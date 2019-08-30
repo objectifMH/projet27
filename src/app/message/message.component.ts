@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, EventEmitter, Output } from '@angular/core';
 import { Message } from '../message';
 import { ProjetService } from '../projet.service';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -14,6 +14,9 @@ export class MessageComponent implements OnInit {
 
   @Input('messageInput')
   message:Message
+
+  @Output()
+  delete = new EventEmitter<Message>();
 
   utilisateur :  Utilisateur
 
@@ -36,6 +39,7 @@ export class MessageComponent implements OnInit {
 
 deleteMessage(messageDelete : Message){
   console.log(" je vais te supprimer >> " + messageDelete.content)
+  this.delete.emit(this.delete);
 }
 
 }
