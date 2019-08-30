@@ -24,6 +24,7 @@ Pour lancer le server json, il faut se rendre dans le dossier /src :
 Cette commande va simuler une API rest qu'on peut interroger avec : 
 
   Resources
+  
   http://localhost:3000/utilisateurs
   
   http://localhost:3000/objets
