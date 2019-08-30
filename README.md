@@ -25,10 +25,13 @@ Cette commande va simuler une API rest qu'on peut interroger avec :
 
   Resources
   http://localhost:3000/utilisateurs
+  
   http://localhost:3000/objets
+  
   http://localhost:3000/messages
 
   Home
+  
   http://localhost:3000
   
 Une fois le json démarrer, on peut considérer que notre BACK est lancé.
@@ -52,6 +55,9 @@ On peut cliquer sur le propriétaire et voir les différents objets qu'il a sur 
 On peut ajouter de nouveaux objets, mettre à jour ou supprimer ceux qui sont déja présent.
 On peut supprimer des utilisateurs.
 
+# A venir
+
+Ajouter des messages dans la rubrique "Messages" et supprimer des messages.
 
 
 
