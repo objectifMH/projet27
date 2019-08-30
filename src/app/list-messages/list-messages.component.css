@@ -7,6 +7,15 @@
 
 
 .smallContainer {
-    width: 70%;
-    margin: 31px auto;
+    width: 100%;
+    margin: 30px auto;
+}
+
+.myBadge {
+    margin-top: -32px;
+}
+
+.myBadge:hover {
+    color:blue; 
+    background: white;
 }

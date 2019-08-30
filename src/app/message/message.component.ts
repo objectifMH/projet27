@@ -12,34 +12,25 @@ import { Utilisateur } from '../utilisateur';
 })
 export class MessageComponent implements OnInit {
 
+  // tslint:disable-next-line:no-input-rename
   @Input('messageInput')
-  message:Message
+  message: Message;
 
   @Output()
-  delete = new EventEmitter<Message>();
+  delete = new EventEmitter();
 
-  utilisateur :  Utilisateur
+  utilisateur: Utilisateur = null ;
 
-  constructor(private projetService: ProjetService , private route: ActivatedRoute  , private router: Router ) { }
+  constructor(private projetService: ProjetService, private route: ActivatedRoute, private router: Router) { }
 
   ngOnInit() {
-    let  messageId = +this.message.utilisateurId
-   
-        this.utilisateur = this.message.utilisateur ; 
-        console.log(this.message); 
-        /*this.projetService.getUtilisateur(this.message.utilisateurId).subscribe(
-          result => { 
-            this.utilisateur = result ; 
-          }
-        )*/
-        
-      }
-    
-  
+    this.utilisateur = this.message.utilisateur;
+  }
 
-deleteMessage(messageDelete : Message){
-  console.log(" je vais te supprimer >> " + messageDelete.content)
-  this.delete.emit(this.delete);
-}
+
+
+  deleteMessage(messageDelete: Message) {
+    this.delete.emit(this.delete);
+  }
 
 }

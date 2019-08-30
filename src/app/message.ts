@@ -1,5 +1,8 @@
+import { Utilisateur } from './utilisateur';
+
 export class Message {
     id: number
     content: string
-    utilisateurId:number
+    utilisateurId: number
+    utilisateur: Utilisateur
 }

@@ -3,3 +3,9 @@
     height: 45px;
     border-radius: 50px ! important;
 }
+
+
+.mat-icon:hover {
+    font-size: 28px;
+    color:red ;
+}

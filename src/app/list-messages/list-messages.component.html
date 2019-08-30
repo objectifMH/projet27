@@ -1,10 +1,12 @@
+
 <div class="container monContainer clearBoth">
+    <span class = "badge  badge-primary badge-pill myRight  myBadge">{{messages.length}} posts</span>
     <div class="container ">
         <app-message *ngFor="let message of messages" [messageInput]="message" (delete)="deleteMessage(message)">
         </app-message>
     </div>
     <div class="smallContainer">
-        <mat-icon aria-hidden="false" class="myGreen icon-utilisateur myCursorPointer myRight"
+        <mat-icon aria-hidden="false" class="myGreen icon-utilisateur myCursorPointer "
             aria-label="ajouter un objet" (click)="addFormMessage()">add_circle</mat-icon>
 
     </div>
@@ -24,7 +26,7 @@
                                 <input type="text" class="form-control" placeholder="Messages ... ">
                         </div>
                 </div>
-                <div class="col-auto my-1">
+                <div class="col-auto my-1 clearBoth">
                     <button type="submit" class="btn btn-primary" (click)=validateMessage(f.value)>Submit</button>
                 </div>
             </div>
