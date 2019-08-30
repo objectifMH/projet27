@@ -49,6 +49,7 @@ Inscription - inscription d'un membre
 Scénario : 
 
 L'inscription d'un membre, il peut consulter tous les objets.
+Faire une recherche sur les objets. 
 On clique sur un objet cela nous renvoie une page avec l'objet et son propriétaire.
 On peut mettre à jour l'objet ou le supprimer. 
 On peut cliquer sur le propriétaire et voir les différents objets qu'il a sur la plateforme.
