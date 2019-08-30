@@ -54,11 +54,11 @@ On clique sur un objet cela nous renvoie une page avec l'objet et son propriéta
 On peut mettre à jour l'objet ou le supprimer. 
 On peut cliquer sur le propriétaire et voir les différents objets qu'il a sur la plateforme.
 On peut ajouter de nouveaux objets, mettre à jour ou supprimer ceux qui sont déja présent.
-On peut supprimer des utilisateurs.
+On peut supprimer des utilisateurs et des messages.
 
 # A venir
 
-Ajouter des messages dans la rubrique "Messages" et supprimer des messages.
+Ajouter des messages dans la rubrique "Messages".
 
 
 
