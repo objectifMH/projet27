@@ -19,6 +19,7 @@ Installer json server :
 
 Pour lancer le server json, il faut se rendre dans le dossier /src :
 > cd src 
+
 > json-server --watch projet.json
 
 Cette commande va simuler une API rest qu'on peut interroger avec : 
