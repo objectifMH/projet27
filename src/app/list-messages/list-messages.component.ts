@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Message } from '../message';
 import { ProjetService } from '../projet.service';
 import { Utilisateur } from '../utilisateur';
+import { FormGroup, FormBuilder } from '@angular/forms';
 
 @Component({
   selector: 'app-list-messages',
@@ -13,13 +14,24 @@ export class ListMessagesComponent implements OnInit {
   messages: Message[] = [];
   utilisateurs: Utilisateur[];
 
+  addMess: Message;
   newMessage: string;
 
   isCreateMessage: boolean = false;
 
-  constructor(private projetService: ProjetService) { }
+  messageForm: FormGroup;
+
+  constructor(private projetService: ProjetService, private fb: FormBuilder) { }
+
+
 
   ngOnInit() {
+
+    this.messageForm = this.fb.group({
+      utilisateurId: [''],
+      content: ['']
+    });
+
     this.refreshMessages();
   }
 
@@ -30,7 +42,7 @@ export class ListMessagesComponent implements OnInit {
         result => {
           (this.messages = result);
           this.projetService.getUtilisateurs().subscribe(
-            resultUtil => { (this.utilisateurs = resultUtil);  },
+            resultUtil => { (this.utilisateurs = resultUtil); },
             error => console.error("Une erreur est survenue, on arrive pas a recuperer les messages", error)
 
           )
@@ -47,8 +59,20 @@ export class ListMessagesComponent implements OnInit {
   }
 
   validateMessage(val) {
-    console.log(val);
+    val.utilisateurId = + val.utilisateurId;
+    this.projetService.AddMessage(val).subscribe(() => this.refreshMessages())
+
   }
+
+  get contentControl() {
+    return this.messageForm.get('contentControl')
+  }
+
+  get idControl() {
+    return this.messageForm.get('idControl')
+  }
+
+
 
   addMessage(messageToAdd: Message) {
     this.projetService.AddMessage(messageToAdd).subscribe(() => this.refreshMessages())

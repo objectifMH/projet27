@@ -11,23 +11,23 @@
 
     </div>
     <div *ngIf="isCreateMessage" class="clearBoth margin-top20 p-3">
-        <form #f>
+        <form #f="ngForm" (ngSubmit)="validateMessage(f.value)"  [formGroup]="messageForm" >
             <div class="form-row align-items-center">
                 <div class="col-auto my-1">
-                    <select class="custom-select mr-sm-2" id="inlineFormCustomSelect">
-                        <option selected>Login</option>
+                        <select formControlName="utilisateurId" class="custom-select mr-sm-2" id="inlineFormCustomSelect">
+                                <option [value]="utilis.id" *ngFor="let utilis of utilisateurs">             {{utilis.login}}</option>
+                        </select>
 
-                        <option *ngFor="let utilis of utilisateurs" value="{{utilis.id}}">{{utilis.login}}</option>
-
-                    </select>
                 </div>
+
+
                 <div class="col-auto my-1">
                         <div class="col">
-                                <input type="text" class="form-control" placeholder="Messages ... ">
+                                <input type="text" class="form-control"  formControlName="content" placeholder="Messages ... ">
                         </div>
                 </div>
                 <div class="col-auto my-1 clearBoth">
-                    <button type="submit" class="btn btn-primary" (click)=validateMessage(f.value)>Submit</button>
+                    <button type="submit" class="btn btn-primary" >Submit</button>
                 </div>
             </div>
         </form>
